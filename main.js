@@ -629,6 +629,7 @@ function reStarttimerCir(currentIndexPara) {
             newQuis();
         }
 }, 10);
+
 }
 
 
