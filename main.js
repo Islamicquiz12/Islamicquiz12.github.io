@@ -639,4 +639,3 @@ function reStarttimerCir(currentIndexPara) {
 }
 
 
-
