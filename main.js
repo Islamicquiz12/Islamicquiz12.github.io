@@ -571,16 +571,7 @@ function checkA(e) {
         numCir.innerHTML = goodAns;
         numCir.style.animation = "popin 300ms";
     }
-    for (j = 0; j < answers.length; j++) {
-        answers[j].parentElement.removeAttribute("onclick");
-        answers[j].parentElement.style.transition = "background-color 1s 400ms";
-        if (answers[j].previousElementSibling.value == "true") {
-            answers[j].parentElement.style.backgroundColor = "#2eb75d";
-        } else {
-            answers[j].parentElement.style.backgroundColor = "#e4394e";
-        }
-        answers[j].parentElement.style.color = "#eee";
-    }
+    exposeAns();
     e.style.transition = "background-color 1s 0ms";
     clearInterval(tiInt);
     setTimeout(()=>{
@@ -591,6 +582,18 @@ function checkA(e) {
 }
 newQuis();
 
+function exposeAns() {
+    for (j = 0; j < answers.length; j++) {
+        answers[j].parentElement.removeAttribute("onclick");
+        answers[j].parentElement.style.transition = "background-color 1s 400ms";
+        if (answers[j].previousElementSibling.value == "true") {
+            answers[j].parentElement.style.backgroundColor = "#2eb75d";
+        } else {
+            answers[j].parentElement.style.backgroundColor = "#e4394e";
+        }
+        answers[j].parentElement.style.color = "#eee";
+    }
+}
 
 let timerArr = [
     "polygon(50% 0%,50% 50%,50% 0%,100% 0%,100% 100%,0 100%,0% 0%)",
@@ -613,7 +616,11 @@ function timerFun() {
         timerCir.style.clipPath = timerArr[currentIndexCirArr];
         if (currentIndexCirArr == 9) {
             clearInterval(tiInt);
-            reStarttimerCir(currentIndexCirArr);
+            exposeAns();
+           setTimeout(()=>{
+               reStarttimerCir(currentIndexCirArr);
+               
+           },2500); 
         }
         currentIndexCirArr++;
     }, timeQ / 9)
@@ -629,7 +636,6 @@ function reStarttimerCir(currentIndexPara) {
             newQuis();
         }
 }, 10);
-
 }
 
 
