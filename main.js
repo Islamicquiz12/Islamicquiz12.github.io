@@ -517,7 +517,6 @@ let timerCir = document.querySelector(".spanparent>span:first-child");
 let numCir = document.querySelector(".spanparent>.num");
 let question = document.querySelector("section h2");
 let answers = document.querySelectorAll("ul>li>label");
-let timeQ = 27000;
 function newQuis() {
     if (Questions[questionIndex].id == 50) {
 
@@ -608,13 +607,19 @@ let timerArr = [
 ]
 var tiInt;
 var currentIndexCirArr=1;
+var startTime ;
+var elapsedTime;
+var currentTime;
 function timerFun() {
+startTime = new Date();
     currentIndexCirArr=1;
     timerCir.style.clipPath="polygon(50% 0%,50% 50%,50% 0%,100% 0%,100% 100%,0 100%,0% 0%)";
     tiInt= setInterval(() => {
         timerCir.style.transitionDuration="3000ms";
         timerCir.style.clipPath = timerArr[currentIndexCirArr];
-        if (currentIndexCirArr == 9) {
+currentTime = new Date();
+elapsedTime = Math.floor((currentTime - startTime) / 1000);
+        if (elapsedTime>=27) {
             clearInterval(tiInt);
             exposeAns();
            setTimeout(()=>{
@@ -623,7 +628,7 @@ function timerFun() {
            },2500); 
         }
         currentIndexCirArr++;
-    }, timeQ / 9)
+    }, 3000)
 }
 
 function reStarttimerCir(currentIndexPara) {
@@ -637,5 +642,6 @@ function reStarttimerCir(currentIndexPara) {
         }
 }, 10);
 }
+
 
 
