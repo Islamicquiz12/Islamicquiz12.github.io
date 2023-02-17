@@ -1,3 +1,39 @@
+var inputT =document.getElementById("inputT");
+let sec = document.querySelectorAll("section");let goodAns = 0;
+var errorMassage=document.getElementById("errorMassage");
+function clickEffect (fg) {
+    fg.style.animation='clickEffect 200ms';
+    setTimeout(()=>{
+        fg.style.animation='none';
+        }
+    ,200)
+}
+let userNameArr;
+function checkValidation(e) {
+userNameArr=e.value.split(" ");
+    if (e.value!="") {
+    if (userNameArr[1]!="" && userNameArr.length>1) {inputT.style.border="1px solid transparent";    errorMassage.style.height="0px";}}
+}
+function errorIn(st){
+    inputT.style.border="1px solid #ff0000";
+    inputT.style.animation="errorInput 100ms";
+    errorMassage.style.height="20px"; 
+    setTimeout(()=>{inputT.style.animation="none";},200)
+    errorMassage.innerHTML=st;
+   inputT.setAttribute("oninput","checkValidation(this)");
+   
+}
+function getName () {
+userNameArr=inputT.value.split(" ");
+    if (inputT.value!="") {
+    if (userNameArr[1]!="" && userNameArr.length>1) {
+    localStorage.setItem("userName", inputT.value);
+sec[0].style.display="none";
+sec[1].style.display="flex";
+newQuis();
+    }else {errorIn("يرجى ادخال الاسم الثنائي");}}else{
+    errorIn("يرجى ادخال الاسم");
+}}
 const Questions = [{
     id: 0,
     q: "من هو الصحابي الذي عند موته اهتز عرش الرحمن؟",
@@ -508,10 +544,14 @@ const Questions = [{
     ]
 
 }];
+let questionIndex;
+if (localStorage.getItem("questionIndex") == null) {
+    questionIndex=0;
+}else {
+   alert(localStorage.getItem("questionIndex"));
+   goodAns=localStorage.getItem("goodAns"); questionIndex=localStorage.getItem("questionIndex");
+}
 
-let questionIndex = 0;
-let goodAns = 0;
-let section = document.querySelector("section");
 let topCir = document.querySelector(".spanparent");
 let timerCir = document.querySelector(".spanparent>span:first-child");
 let numCir = document.querySelector(".spanparent>.num");
@@ -520,8 +560,8 @@ let answers = document.querySelectorAll("ul>li>label");
 function newQuis() {
     if (Questions[questionIndex].id == 50) {
 
-        section.innerHTML = "<h3></h3><progress max=50 value=" + goodAns + "></progress><div class='res'>  الإجابات الصحيحة <p>" + goodAns + "</p><p> من </p><p>50</p></div>";
-        section.className = "secres";
+        sec[1].innerHTML = "<h1>"+localStorage.getItem('userName')+"</h1><h3></h3><progress max=50 value=" + goodAns + "></progress><div class='res'>  الإجابات الصحيحة <p>" + goodAns + "</p><p> من </p><p>50</p></div>";
+        sec[1].className = "secres";
         let h3 = document.querySelector("h3");
         let prog = document.querySelector("progress");
         if (goodAns < 10) {
@@ -547,7 +587,7 @@ function newQuis() {
     } else {
         timerFun();
         numCir.innerHTML = goodAns;
-        question.innerHTML = (1 + questionIndex) + "- " + Questions[questionIndex].q;
+        question.innerHTML = (questionIndex) + "- " + Questions[questionIndex].q;
         for (i = 0; i < 4; i++) {
             answers[i].parentElement.style.transition = "0s";
             answers[i].innerHTML = Questions[questionIndex].a[i].text;
@@ -557,13 +597,12 @@ function newQuis() {
             answers[i].parentElement.setAttribute("onclick", "checkA(this)");
         }
         questionIndex++;
-    }
+        localStorage.setItem("questionIndex", questionIndex);
+        localStorage.setItem("goodAns",goodAns );
+    } 
 }
 function checkA(e) {
-    e.style.transform = "scale(.98)";
-    setTimeout(() => {
-        e.style.transform = "scale(1)";
-    }, 200);
+    clickEffect(e);
 
     if (e.children[0].value == "true") {
         goodAns++;
@@ -579,7 +618,6 @@ function checkA(e) {
     },2000);
 
 }
-newQuis();
 
 function exposeAns() {
     for (j = 0; j < answers.length; j++) {
@@ -609,7 +647,7 @@ var tiInt;
 var currentIndexCirArr=1;
 var startTime ;
 var elapsedTime;
-var currentTime;
+var currentTime = new Date();
 function timerFun() {
 startTime = new Date();
     currentIndexCirArr=1;
