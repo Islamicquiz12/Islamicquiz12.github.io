@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>اختبر نفسك8</title>
+    <title>اختبر نفسك</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <meta name="description" content="This is quize islamic website">
   <meta name="keywords" content="islam, quiz, information, Islamic, islamicquiz12, 773095921">
@@ -20,19 +20,18 @@
 ]
 }
 </script>
-</head>
-<body>
-    
-</body>
-</html><!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Page title</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <section>
+    <section class="firstSection">
+        <label>الاسم</label>
+        <div class="contain">
+        <input type="text" placeholder="الاسم" id="inputT" oninput="checkValidation(this)">
+        <p id="errorMassage"></p>
+        </div>
+        <input type="button" value="ابدا" onclick="clickEffect(this);getName()">
+    </section>
+    <section style="display: none;">
     <div class="buffer">
         <span class="spanparent">
             <span class="timerCir"></span>
