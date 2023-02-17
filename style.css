@@ -20,6 +20,45 @@ section{
     width: 80%;
     text-align: center;
 }
+.firstSection{
+    padding: 12px !important;
+    gap:10px;
+    }
+.firstSection>label{
+    font-size: 24px;
+}
+.firstSection .contain{
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+}
+input {
+    outline: none;
+    border: none;
+    border-radius: 6px;
+    padding: 6px 12px;
+    font-size: 20px;
+    width:  100%;
+    height:  42px;
+    text-align: center;
+    transition: 200ms;
+}
+input[type=button]{
+    background-color: royalblue;
+    padding: 3px;
+    color: white;
+    width:  70%;
+}#errorMassage{
+    color: red;
+    font-size: 13px;
+    transition: 2s;
+    text-align: right;
+    padding-right: 6px;
+    display: inline-block;
+    height: 0;
+    overflow: hidden;
+    transition: 150ms;
+}
 .buffer{
     padding: 20px;
     position: relative;
@@ -80,13 +119,26 @@ progress{
     display: flex;
     align-items: center;
 }
-.secres{
+.secres, .firstSection{
     padding: 6px;
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
+@keyframes errorInput {
+    0%{transform: translate(0,0) scale(1) rotate(0deg);}
+    10%{
+      transform: translate(10px,0) scale(0.98) rotate(2deg);
+    }
+    50%{transform: translate(0px,0) scale(1) rotate(0deg);}
+    90%{transform: translate(-10px,0) scale(0.98) rotate(-2deg);}
+    100%{transform: translate(0,0) scale(1) rotate(0deg);}
+}
+@keyframes clickEffect{
+    0%{transform: scale(0.6);}
+    100%{transform: scale(1);}
+}
 @keyframes popin {
     0%{
         transform: scale(2);
