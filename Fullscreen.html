@@ -4,36 +4,25 @@
     <meta charset="UTF-8">
     <title>Page title</title>
 </head>
-<body onload="DoFullScreen()">
-    <form id="form1" runat="server" >
-        <div id="div1">
-            <input id="bt1" type="button" value="button"   />
-            Hello
-        </div>
-    </form>
+<body onload="ff(this)">
+            <input id="bt1" type="button" value="button" onclick ="openFullscreen()"  />
+
      <script type="text/javascript">
-            function DoFullScreen() {
-
-                var isInFullScreen = (document.fullScreenElement && document.fullScreenElement !== null) ||    // alternative standard method  
-                (document.mozFullScreen || document.webkitIsFullScreen);
-
-                var docElm = document.documentElement;
-                if (!isInFullScreen) {
-
-                    if (docElm.requestFullscreen) {
-                        docElm.requestFullscreen();
-                    }
-                    else if (docElm.mozRequestFullScreen) {
-                        docElm.mozRequestFullScreen();
-                        //alert("Mozilla entering fullscreen!");
-                    }
-                    else if (docElm.webkitRequestFullScreen) {
-                        docElm.webkitRequestFullScreen();
-                        alert("Webkit entering fullscreen!");
-                    }
-                }
-            }
-
+         let bt=document.getElementById("bt1");
+         function ff () {
+             setTimeout(()=>{bt.click();},2000);
+         }
+         var elem = document.documentElement;
+     
+function openFullscreen() {
+  if (elem.requestFullscreen) {
+    elem.requestFullscreen();
+  } else if (elem.webkitRequestFullscreen) { /* Safari */
+    elem.webkitRequestFullscreen();
+  } else if (elem.msRequestFullscreen) { /* IE11 */
+    elem.msRequestFullscreen();
+  }
+}
         </script>
 </body>
 </html>
