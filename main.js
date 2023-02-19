@@ -1,6 +1,14 @@
+let goodAns;
+let questionIndex;
+let userNameArr;
 var inputT =document.getElementById("inputT");
-let sec = document.querySelectorAll("section");let goodAns = 0;
+let sec = document.querySelectorAll("section");
 var errorMassage=document.getElementById("errorMassage");
+let topCir = document.querySelector(".spanparent");
+let timerCir = document.querySelector(".spanparent>span:first-child");
+let numCir = document.querySelector(".spanparent>.num");
+let question = document.querySelector("section h2");
+let answers = document.querySelectorAll("ul>li>label");
 function clickEffect (fg) {
     fg.style.animation='clickEffect 200ms';
     setTimeout(()=>{
@@ -8,7 +16,14 @@ function clickEffect (fg) {
         }
     ,200)
 }
-let userNameArr;
+function reSet () {
+    localStorage.removeItem("userName");
+    localStorage.removeItem("questionIndex");
+    localStorage.removeItem("goodAns");
+    window.location.reload();
+    sec[0].style.display="flex";
+    sec[1].style.display="none";
+}
 function checkValidation(e) {
 userNameArr=e.value.split(" ");
     if (e.value!="") {
@@ -16,11 +31,11 @@ userNameArr=e.value.split(" ");
 }
 function errorIn(st){
     inputT.style.border="1px solid #ff0000";
-    inputT.style.animation="errorInput 100ms";
+    inputT.style.animation="errorInput 200ms ease-in-out";
     errorMassage.style.height="20px"; 
     setTimeout(()=>{inputT.style.animation="none";},200)
     errorMassage.innerHTML=st;
-   inputT.setAttribute("oninput","checkValidation(this)");
+    inputT.setAttribute("oninput","checkValidation(this)");
    
 }
 function getName () {
@@ -544,23 +559,10 @@ const Questions = [{
     ]
 
 }];
-let questionIndex;
-if (localStorage.getItem("questionIndex") == null) {
-    questionIndex=0;
-}else {
-   alert(localStorage.getItem("questionIndex"));
-   goodAns=localStorage.getItem("goodAns"); questionIndex=localStorage.getItem("questionIndex");
-}
-
-let topCir = document.querySelector(".spanparent");
-let timerCir = document.querySelector(".spanparent>span:first-child");
-let numCir = document.querySelector(".spanparent>.num");
-let question = document.querySelector("section h2");
-let answers = document.querySelectorAll("ul>li>label");
 function newQuis() {
     if (Questions[questionIndex].id == 50) {
 
-        sec[1].innerHTML = "<h1>"+localStorage.getItem('userName')+"</h1><h3></h3><progress max=50 value=" + goodAns + "></progress><div class='res'>  الإجابات الصحيحة <p>" + goodAns + "</p><p> من </p><p>50</p></div>";
+        sec[1].innerHTML = "<h1>"+localStorage.getItem('userName')+"</h1><h3></h3><progress max=50 value=" + goodAns + "></progress><div class='res'>  الإجابات الصحيحة <p>" + goodAns + "</p><p> من </p><p>50</p></div><input type='button' onclick='reSet()' value='اعادة'>";
         sec[1].className = "secres";
         let h3 = document.querySelector("h3");
         let prog = document.querySelector("progress");
@@ -680,6 +682,16 @@ function reStarttimerCir(currentIndexPara) {
         }
 }, 10);
 }
-
+console.log(localStorage.getItem("questionIndex"));
+if (localStorage.getItem("questionIndex") == null) {
+    questionIndex=0;
+    goodAns = 0;
+}else {
+   goodAns=localStorage.getItem("goodAns"); 
+   questionIndex=localStorage.getItem("questionIndex");
+   sec[0].style.display="none";
+   sec[1].style.display="flex";
+   newQuis();   
+}
 
 
