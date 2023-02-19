@@ -57,11 +57,12 @@ input[type=button]{
     display: inline-block;
     height: 0;
     overflow: hidden;
-    transition: 150ms;
+    transition: 500ms;
 }
 .buffer{
     padding: 20px;
     position: relative;
+    width: 100%;
 }
 .spanparent{
     width: 70px;
@@ -99,6 +100,9 @@ justify-content: center;
 align-items: center;
 transition: 1800ms linear;
 }
+ul{
+    width: 100%;
+}
 li{
     list-style: none; 
     margin: 6px 0;
@@ -106,6 +110,7 @@ li{
     border-radius: 6px;
     background-color: #d5fff4;
     text-align: center;
+    width:  100%;
 }
 li>input{
     display: none;
@@ -125,18 +130,21 @@ progress{
     flex-direction: column;
     align-items: center;
 }
-
+input[value=اعادة]{
+    width: auto;
+    padding: 0 10px;
+    
+}
 @keyframes errorInput {
-    0%{transform: translate(0,0) scale(1) rotate(0deg);}
-    10%{
-      transform: translate(10px,0) scale(0.98) rotate(2deg);
-    }
-    50%{transform: translate(0px,0) scale(1) rotate(0deg);}
-    90%{transform: translate(-10px,0) scale(0.98) rotate(-2deg);}
+    10%{transform: translate(-4px,0) scale(.98) rotate(1deg);}
+    20%{transform: translate(0,0) scale(1) rotate(0deg);}
+    40%{transform: translate(4px,0) scale(.98) rotate(-1deg);}
+    60%{transform: translate(0,0) scale(1) rotate(0deg);}
+    80%{transform: translate(-4px,0) scale(.98) rotate(1deg);}
     100%{transform: translate(0,0) scale(1) rotate(0deg);}
 }
 @keyframes clickEffect{
-    0%{transform: scale(0.6);}
+    0%{transform: scale(0.9);}
     100%{transform: scale(1);}
 }
 @keyframes popin {
