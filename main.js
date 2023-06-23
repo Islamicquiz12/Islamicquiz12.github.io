@@ -612,7 +612,7 @@ function newQuis() {
     } else {
         timerFun();
         numCir.innerHTML = goodAns;
-        question.innerHTML = (questionIndex) + "- " + Questions[questionIndex].q;
+        question.innerHTML = (questionIndex+1) + "- " + Questions[questionIndex].q;
         for (i = 0; i < 4; i++) {
             answers[i].parentElement.style.transition = "0s";
             answers[i].innerHTML = Questions[questionIndex].a[i].text;
