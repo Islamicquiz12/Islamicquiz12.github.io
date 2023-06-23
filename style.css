@@ -7,6 +7,35 @@
     margin: 0;
     padding: 0;
 }
+
+body,:root ,html {
+    display: inline-block;
+    height: 100vh;
+    position: relative;width: 100vw;
+    overflow: hidden;
+    background-color: #232323;
+    --dlight: #ffffffaa;
+    --yellow:rgb(247, 190, 17);
+}
+
+.redLight {
+    transition: 20s linear;
+    position: absolute;
+    transform: translate(556px,-976px);
+    height: 2000px;
+    width: 2000px;
+    background: radial-gradient(rgba(255, 0, 0, 0.741), transparent, transparent);
+}
+
+.blueLight {
+    transition: 20s linear;
+    position: absolute;
+    transform: translate(900px,-631px);
+    height: 2000px;
+    width: 2000px;
+    background: radial-gradient(rgba(0, 0, 255, 0.516), transparent, transparent);
+
+}
 body{
     direction: rtl;
 }
@@ -14,11 +43,16 @@ section{
     position: absolute;
     top: 50%;
     left: 50%;
-    transform: translate(-50%,-50%);
-    background-color: #ffd5df;
     border-radius: 12px;
     width: 80%;
     text-align: center;
+    padding-top: 15px;
+    box-shadow: -1px -1px 1px 0px #ffffff24;
+    background-color: rgb(255 255 255 / 3%);
+    z-index: 99;
+    animation-name: flow;
+    animation-duration: 10s;
+    animation-iteration-count: infinite;
 }
 .firstSection{
     padding: 12px !important;
@@ -44,20 +78,25 @@ input {
     transition: 200ms;
 }
 input[type=button]{
-    background-color: royalblue;
+    margin-top: -8px;
+    background-color: #4169e194;
     padding: 3px;
     color: white;
     width:  70%;
 }#errorMassage{
     color: red;
-    font-size: 13px;
+    font-size: 12px;
     transition: 2s;
     text-align: right;
     padding-right: 6px;
+    margin-top: 6px;
     display: inline-block;
     height: 0;
     overflow: hidden;
     transition: 500ms;
+}
+.scondSection{
+    
 }
 .buffer{
     padding: 20px;
@@ -65,14 +104,16 @@ input[type=button]{
     width: 100%;
 }
 .spanparent{
+    box-shadow: -1px -1px 1px 0px #ffffff24;
     width: 70px;
     height: 70px;
-    background-color:#ffeaea;
+    background-color:#0000006a;
     display: inline-flex;
     align-items: center;
     justify-content: center;
     position: absolute;
     left: 50%;
+    top: 10px;
     transform: translate(-50%,-100%);
     border-radius: 50%;
     font-size: 24px;
@@ -91,7 +132,8 @@ input[type=button]{
 }
 .spanparent>span:first-child{
 position: absolute;
-border: 2px solid #27657d;
+border-width: 2px;border-style: solid;/* border: 2px solid var(--yellow); */
+box-shadow: 0 0 20px -10px rgb(95 254 50) inset;
 border-radius: 50%;
 height: 100%;
 width: 100%;
@@ -99,6 +141,13 @@ display: flex;
 justify-content: center;
 align-items: center;
 transition: 1800ms linear;
+}
+.num{
+    color:var(--dlight);
+    text-shadow: 0 0 30px var(--dlight);
+}
+.buffer>h2{
+    color:var(--dlight);
 }
 ul{
     width: 100%;
@@ -108,17 +157,19 @@ li{
     margin: 6px 0;
     padding: 6px 12px;
     border-radius: 6px;
-    background-color: #d5fff4;
     text-align: center;
     width:  100%;
 }
 li>input{
     display: none;
 }
+li>label{
+    color:var(--dlight);
+}
 progress{
     width: 80%;
     height: 40px;
-    
+    opacity: .8;
 }
 .res{
     display: flex;
@@ -131,9 +182,10 @@ progress{
     align-items: center;
 }
 input[value=اعادة]{
-    width: auto;
-    padding: 0 10px;
-    
+    width: 70%;
+    background-color: transparent;
+    border: 1px solid white;
+    margin: 6px;
 }
 @keyframes errorInput {
     10%{transform: translate(-4px,0) scale(.98) rotate(1deg);}
@@ -238,3 +290,15 @@ input[value=اعادة]{
         50% 0%)}
         
         }
+
+@keyframes flow{
+    0%{transform: translate(-50%,-50%) scale(1) rotate(0deg);}
+    50%{transform: translate(-49%,-51%) scale(.99) rotate(1deg);}
+    50%{transform: translate(-50%,-51%) scale(1.01) rotate(-1deg);}
+    50%{transform: translate(-51%,-51%) scale(.99) rotate(0deg);}
+    100%{transform:translate(-50%,-50%)  scale(1) rotate(0deg);}
+}@keyframes change-color{
+    0%{border-color:rgb(0, 149, 255);box-shadow:0 0 20px -10px rgb(0, 149, 255) inset}
+    40%{border-color:rgb(0, 195, 255);box-shadow:0 0 20px -10px rgb(0, 195, 255) inset}
+    100%{border-color:rgb(255, 0, 0);box-shadow:0 0 20px -10px rgb(255, 0, 0) inset}
+}
