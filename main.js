@@ -1,54 +1,77 @@
+var redLight = document.querySelector(".redLight");
+var blueLight = document.querySelector(".blueLight");
+setTimeout(() => {
+    //redLight.style.transform=`translate(400px,-609px)`;
+    //blueLight.style.transform=`translate(50px,-1029px)`;
+}, 200);
+var moveBalls = setInterval(() => {
+    let cordenates = [[3, 4], [5, 6]];
+    cordenates.forEach(
+        (light) => {
+            light[0] = Math.floor(Math.random() * 1400) - 200;
+            light[1] = Math.floor(Math.random() * 1000) - 1000;
+        }
+    );
+    redLight.style.transform = `translate(${cordenates[0][0]}px,${cordenates[0][1]}px)`;
+    blueLight.style.transform = `translate(${cordenates[1][0]}px,${cordenates[1][1]}px)`;
+}, 20000);
+
+
+
 let goodAns;
 let questionIndex;
 let userNameArr;
-var inputT =document.getElementById("inputT");
+var inputT = document.getElementById("inputT");
 let sec = document.querySelectorAll("section");
-var errorMassage=document.getElementById("errorMassage");
+var errorMassage = document.getElementById("errorMassage");
 let topCir = document.querySelector(".spanparent");
 let timerCir = document.querySelector(".spanparent>span:first-child");
 let numCir = document.querySelector(".spanparent>.num");
 let question = document.querySelector("section h2");
 let answers = document.querySelectorAll("ul>li>label");
-function clickEffect (fg) {
-    fg.style.animation='clickEffect 200ms';
-    setTimeout(()=>{
-        fg.style.animation='none';
-        }
-    ,200)
+function clickEffect(fg) {
+    fg.style.animation = 'clickEffect 200ms';
+    setTimeout(() => {
+        fg.style.animation = 'none';
+    }
+        , 200)
 }
-function reSet () {
+function reSet() {
     localStorage.removeItem("userName");
     localStorage.removeItem("questionIndex");
     localStorage.removeItem("goodAns");
     window.location.reload();
-    sec[0].style.display="flex";
-    sec[1].style.display="none";
+    sec[0].style.display = "flex";
+    sec[1].style.display = "none";
 }
 function checkValidation(e) {
-userNameArr=e.value.split(" ");
-    if (e.value!="") {
-    if (userNameArr[1]!="" && userNameArr.length>1) {inputT.style.border="1px solid transparent";    errorMassage.style.height="0px";}}
+    userNameArr = e.value.split(" ");
+    if (e.value != "") {
+        if (userNameArr[1] != "" && userNameArr.length > 1) { inputT.style.border = "1px solid transparent"; errorMassage.style.height = "0px"; }
+    }
 }
-function errorIn(st){
-    inputT.style.border="1px solid #ff0000";
-    inputT.style.animation="errorInput 200ms ease-in-out";
-    errorMassage.style.height="20px"; 
-    setTimeout(()=>{inputT.style.animation="none";},200)
-    errorMassage.innerHTML=st;
-    inputT.setAttribute("oninput","checkValidation(this)");
-   
+function errorIn(st) {
+    inputT.style.border = "1px solid #ff0000";
+    inputT.style.animation = "errorInput 200ms ease-in-out";
+    errorMassage.style.height = "20px";
+    setTimeout(() => { inputT.style.animation = "none"; }, 200)
+    errorMassage.innerHTML = st;
+    inputT.setAttribute("oninput", "checkValidation(this)");
+
 }
-function getName () {
-userNameArr=inputT.value.split(" ");
-    if (inputT.value!="") {
-    if (userNameArr[1]!="" && userNameArr.length>1) {
-    localStorage.setItem("userName", inputT.value);
-sec[0].style.display="none";
-sec[1].style.display="flex";
-newQuis();
-    }else {errorIn("يرجى ادخال الاسم الثنائي");}}else{
-    errorIn("يرجى ادخال الاسم");
-}}
+function getName() {
+    userNameArr = inputT.value.split(" ");
+    if (inputT.value != "") {
+        if (userNameArr[1] != "" && userNameArr.length > 1) {
+            localStorage.setItem("userName", inputT.value);
+            sec[0].style.display = "none";
+            sec[1].style.display = "flex";
+            newQuis();
+        } else { errorIn("يرجى ادخال الاسم الثنائي"); }
+    } else {
+        errorIn("يرجى ادخال الاسم");
+    }
+}
 const Questions = [{
     id: 0,
     q: "من هو الصحابي الذي عند موته اهتز عرش الرحمن؟",
@@ -562,26 +585,26 @@ const Questions = [{
 function newQuis() {
     if (Questions[questionIndex].id == 50) {
 
-        sec[1].innerHTML = "<h1>"+localStorage.getItem('userName')+"</h1><h3></h3><progress max=50 value=" + goodAns + "></progress><div class='res'>  الإجابات الصحيحة <p>" + goodAns + "</p><p> من </p><p>50</p></div><input type='button' onclick='reSet()' value='اعادة'>";
+        sec[1].innerHTML = "<h1  Style='color:white;'>" + localStorage.getItem('userName') + "</h1><h3  Style='color:white;'></h3><progress max=50 value=" + goodAns + "></progress><div class='res' Style='color:white;'>  الإجابات الصحيحة <p  Style='color:white;'> " + goodAns + " </p><p  Style='color:white;'> من </p><p  Style='color:white;'> 50 </p></div><input type='button' onclick='reSet()' value='اعادة'>";
         sec[1].className = "secres";
         let h3 = document.querySelector("h3");
         let prog = document.querySelector("progress");
         if (goodAns < 10) {
             prog.style.accentColor = "red";
             h3.innerHTML = "ضعيف";
-        } else if (goodAns < 20) {
+        } else if (goodAns < 15) {
             prog.style.accentColor = "#d44e00";
             h3.innerHTML = "مقبول";
-        } else if (goodAns < 30) {
+        } else if (goodAns < 20) {
             prog.style.accentColor = "#d4b700";
             h3.innerHTML = "جيد";
-        } else if (goodAns < 40) {
+        } else if (goodAns < 27) {
             prog.style.accentColor = "#abd400";
             h3.innerHTML = "جيد جدا";
-        } else if (goodAns < 46) {
+        } else if (goodAns < 35) {
             prog.style.accentColor = "#20d400";
             h3.innerHTML = "ممتاز";
-        } else if (goodAns == 50) {
+        } else if (goodAns == 45) {
             prog.style.accentColor = "#0026d4";
             h3.innerHTML = "شيخ";
         }
@@ -594,14 +617,14 @@ function newQuis() {
             answers[i].parentElement.style.transition = "0s";
             answers[i].innerHTML = Questions[questionIndex].a[i].text;
             answers[i].parentElement.style.color = "unset";
-            answers[i].parentElement.style.backgroundColor = "#d5fff4";
+            answers[i].parentElement.style.backgroundColor = "rgb(255 255 255 / 9%)";
             answers[i].previousElementSibling.value = Questions[questionIndex].a[i].isCorrect;
             answers[i].parentElement.setAttribute("onclick", "checkA(this)");
         }
         questionIndex++;
         localStorage.setItem("questionIndex", questionIndex);
-        localStorage.setItem("goodAns",goodAns );
-    } 
+        localStorage.setItem("goodAns", goodAns);
+    }
 }
 function checkA(e) {
     clickEffect(e);
@@ -614,10 +637,10 @@ function checkA(e) {
     exposeAns();
     e.style.transition = "background-color 1s 0ms";
     clearInterval(tiInt);
-    setTimeout(()=>{
+    setTimeout(() => {
         numCir.style.animation = "none";
         reStarttimerCir(currentIndexCirArr);
-    },2000);
+    }, 2000);
 
 }
 
@@ -626,9 +649,9 @@ function exposeAns() {
         answers[j].parentElement.removeAttribute("onclick");
         answers[j].parentElement.style.transition = "background-color 1s 400ms";
         if (answers[j].previousElementSibling.value == "true") {
-            answers[j].parentElement.style.backgroundColor = "#2eb75d";
+            answers[j].parentElement.style.backgroundColor = "#0cff0094";
         } else {
-            answers[j].parentElement.style.backgroundColor = "#e4394e";
+            answers[j].parentElement.style.backgroundColor = "#d42e3d94";
         }
         answers[j].parentElement.style.color = "#eee";
     }
@@ -646,52 +669,53 @@ let timerArr = [
     "polygon(50% 0%,50% 50%,50% 0%,50% 0%,50% 0%,50% 0%,50% 0%)"
 ]
 var tiInt;
-var currentIndexCirArr=1;
-var startTime ;
+var currentIndexCirArr = 1;
+var startTime;
 var elapsedTime;
 var currentTime = new Date();
 function timerFun() {
-startTime = new Date();
-    currentIndexCirArr=1;
-    timerCir.style.clipPath="polygon(50% 0%,50% 50%,50% 0%,100% 0%,100% 100%,0 100%,0% 0%)";
-    tiInt= setInterval(() => {
-        timerCir.style.transitionDuration="3000ms";
+    timerCir.style.animation = "change-color 30s";
+    startTime = new Date();
+    currentIndexCirArr = 1;
+    timerCir.style.clipPath = "polygon(50% 0%,50% 50%,50% 0%,100% 0%,100% 100%,0 100%,0% 0%)";
+    tiInt = setInterval(() => {
+        timerCir.style.transitionDuration = "3000ms";
         timerCir.style.clipPath = timerArr[currentIndexCirArr];
-currentTime = new Date();
-elapsedTime = Math.floor((currentTime - startTime) / 1000);
-        if (elapsedTime>=27) {
+        currentTime = new Date();
+        elapsedTime = Math.floor((currentTime - startTime) / 1000);
+        if (elapsedTime >= 27) {
             clearInterval(tiInt);
             exposeAns();
-           setTimeout(()=>{
-               reStarttimerCir(currentIndexCirArr);
-               
-           },2500); 
+            setTimeout(() => {
+                reStarttimerCir(currentIndexCirArr);
+
+            }, 2500);
         }
         currentIndexCirArr++;
     }, 3000)
 }
 
 function reStarttimerCir(currentIndexPara) {
+    timerCir.style.animation = "none";
     timerCir.style.transitionDuration = "10ms";
     let tiIntBack = setInterval(() => {
         currentIndexPara--;
-        timerCir.style.clipPath=timerArr[currentIndexPara];
+        timerCir.style.clipPath = timerArr[currentIndexPara];
         if (currentIndexPara == 0) {
             clearInterval(tiIntBack);
             newQuis();
         }
-}, 10);
+    }, 10);
 }
-console.log(localStorage.getItem("questionIndex"));
 if (localStorage.getItem("questionIndex") == null) {
-    questionIndex=0;
+    questionIndex = 0;
     goodAns = 0;
-}else {
-   goodAns=localStorage.getItem("goodAns"); 
-   questionIndex=localStorage.getItem("questionIndex");
-   sec[0].style.display="none";
-   sec[1].style.display="flex";
-   newQuis();   
+} else {
+    goodAns = localStorage.getItem("goodAns");
+    questionIndex = localStorage.getItem("questionIndex");
+    sec[0].style.display = "none";
+    sec[1].style.display = "flex";
+    newQuis();
 }
 
 
